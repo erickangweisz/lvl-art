@@ -9,7 +9,7 @@ import { JwtInterceptor, ErrorInterceptor } from './_helpers'
 
 import { AppComponent } from './app.component'
 import { HomeComponent } from './_components'
-import { LoginComponent } from './_components/login/login.component'
+import { LoginComponent } from './_components'
 
 @NgModule({
   declarations: [
