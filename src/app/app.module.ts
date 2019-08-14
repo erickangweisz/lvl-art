@@ -8,6 +8,7 @@ import { HttpClientModule, HTTP_INTERCEPTORS } from '@angular/common/http'
 import { JwtInterceptor, ErrorInterceptor } from './_helpers'
 
 import { AppComponent } from './app.component'
+import { NavbarComponent } from './_components'
 import { HomeComponent } from './_components'
 import { LoginComponent } from './_components'
 
@@ -15,7 +16,8 @@ import { LoginComponent } from './_components'
   declarations: [
     AppComponent,
     HomeComponent,
-    LoginComponent
+    LoginComponent,
+    NavbarComponent
   ],
   imports: [
     BrowserModule,
