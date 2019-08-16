@@ -14,7 +14,8 @@ import { NavbarComponent,
          GalleriesComponent, 
          DuelsComponent,
          RankingsComponent,
-         ChatsComponent } from './_components'
+         ChatsComponent,
+         ProfileComponent } from './_components'
 
 @NgModule({
   declarations: [
@@ -25,7 +26,8 @@ import { NavbarComponent,
     GalleriesComponent,
     DuelsComponent,
     RankingsComponent,
-    ChatsComponent
+    ChatsComponent,
+    ProfileComponent
   ],
   imports: [
     BrowserModule,

@@ -5,33 +5,20 @@ import { HomeComponent,
          GalleriesComponent, 
          DuelsComponent, 
          RankingsComponent,
-         ChatsComponent } from './_components'
+         ChatsComponent, 
+         ProfileComponent } from './_components'
          
 import { AuthGuard } from './_guards'
 
 const routes: Routes = [
-  {
-    path: 'home',
-    component: HomeComponent
-  },
-  {
-    path: 'galleries',
-    component: GalleriesComponent
-  },
-  {
-    path: 'duels',
-    component: DuelsComponent
-  },
-  {
-    path: 'rankings',
-    component: RankingsComponent
-  },
-  {
-    path: 'chats',
-    component: ChatsComponent
-  },
-  // otherwise redirect to home
-  { path: '**', redirectTo: '' }
+  { path: 'home', component: HomeComponent },
+  { path: 'galleries', component: GalleriesComponent },
+  { path: 'duels', component: DuelsComponent },
+  { path: 'rankings', component: RankingsComponent },
+  { path: 'chats', component: ChatsComponent },
+  { path: 'profile', component: ProfileComponent, canActivate: [AuthGuard] },
+
+  { path: '**', redirectTo: 'home' }
 ]
 
 @NgModule({
