@@ -7,7 +7,7 @@ import { AuthGuard } from './_guards'
 
 const routes: Routes = [
   {
-    path: '',
+    path: 'home',
     component: HomeComponent
   },
   {
