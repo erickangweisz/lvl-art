@@ -1,10 +1,12 @@
 import { NgModule } from '@angular/core'
 import { Routes, RouterModule } from '@angular/router'
 
-import { HomeComponent } from './_components'
+import { HomeComponent, 
+         GalleriesComponent, 
+         DuelsComponent, 
+         RankingsComponent } from './_components'
+         
 import { AuthGuard } from './_guards'
-import { GalleriesComponent } from './_components'
-import { DuelsComponent } from './_components'
 
 const routes: Routes = [
   {
@@ -18,6 +20,10 @@ const routes: Routes = [
   {
     path: 'duels',
     component: DuelsComponent
+  },
+  {
+    path: 'rankings',
+    component: RankingsComponent
   },
   // otherwise redirect to home
   { path: '**', redirectTo: '' }
