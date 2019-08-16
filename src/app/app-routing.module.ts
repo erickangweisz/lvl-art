@@ -4,6 +4,7 @@ import { Routes, RouterModule } from '@angular/router'
 import { HomeComponent } from './_components'
 import { AuthGuard } from './_guards'
 import { GalleryComponent } from './_components'
+import { DuelsComponent } from './_components'
 
 const routes: Routes = [
   {
@@ -13,6 +14,10 @@ const routes: Routes = [
   {
     path: 'gallery',
     component: GalleryComponent
+  },
+  {
+    path: 'duels',
+    component: DuelsComponent
   },
   // otherwise redirect to home
   { path: '**', redirectTo: '' }

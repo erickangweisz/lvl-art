@@ -12,6 +12,7 @@ import { NavbarComponent } from './_components'
 import { LoginFormComponent } from './_components'
 import { HomeComponent } from './_components'
 import { GalleryComponent } from './_components'
+import { DuelsComponent } from './_components'
 
 @NgModule({
   declarations: [
@@ -19,7 +20,8 @@ import { GalleryComponent } from './_components'
     NavbarComponent,
     LoginFormComponent,
     HomeComponent,
-    GalleryComponent
+    GalleryComponent,
+    DuelsComponent
   ],
   imports: [
     BrowserModule,
