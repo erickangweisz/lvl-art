@@ -1,6 +1,7 @@
 import { Injectable, Inject } from '@angular/core'
 import { HttpClient } from '@angular/common/http'
 import { BehaviorSubject, Observable } from 'rxjs'
+import { Router } from '@angular/router'
 import { map } from 'rxjs/operators'
 import { APP_CONFIG, AppConfig } from 'src/app/app-config.module'
 import { User } from 'src/app/_models'
@@ -11,6 +12,7 @@ export class AuthenticationService {
   public currentUser: Observable<User>
 
   constructor(
+    private router: Router,
     private http: HttpClient,
     @Inject(APP_CONFIG) private config: AppConfig
   ) {
@@ -36,5 +38,6 @@ export class AuthenticationService {
   logout() {
     localStorage.removeItem('currentUser')
     this.currentUserSubject.next(null)
+    this.router.navigate(['home'])
   }
 }
