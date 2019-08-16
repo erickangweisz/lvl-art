@@ -9,15 +9,17 @@ import { JwtInterceptor, ErrorInterceptor } from './_helpers'
 
 import { AppComponent } from './app.component'
 import { NavbarComponent } from './_components'
-import { HomeComponent } from './_components'
 import { LoginFormComponent } from './_components'
+import { HomeComponent } from './_components'
+import { GalleryComponent } from './_components'
 
 @NgModule({
   declarations: [
     AppComponent,
-    HomeComponent,
+    NavbarComponent,
     LoginFormComponent,
-    NavbarComponent
+    HomeComponent,
+    GalleryComponent
   ],
   imports: [
     BrowserModule,
