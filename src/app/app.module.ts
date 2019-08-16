@@ -11,7 +11,7 @@ import { AppComponent } from './app.component'
 import { NavbarComponent } from './_components'
 import { LoginFormComponent } from './_components'
 import { HomeComponent } from './_components'
-import { GalleryComponent } from './_components'
+import { GalleriesComponent } from './_components'
 import { DuelsComponent } from './_components'
 
 @NgModule({
@@ -20,7 +20,7 @@ import { DuelsComponent } from './_components'
     NavbarComponent,
     LoginFormComponent,
     HomeComponent,
-    GalleryComponent,
+    GalleriesComponent,
     DuelsComponent
   ],
   imports: [

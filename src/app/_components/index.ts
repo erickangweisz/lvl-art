@@ -1,5 +1,5 @@
 export { NavbarComponent } from './navbar/navbar.component'
 export { LoginFormComponent } from './login-form/login-form.component'
 export { HomeComponent } from './home/home.component'
-export { GalleryComponent } from './gallery/gallery.component'
+export { GalleriesComponent } from './galleries/galleries.component'
 export { DuelsComponent } from './duels/duels.component'

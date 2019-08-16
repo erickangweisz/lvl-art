@@ -3,7 +3,7 @@ import { Routes, RouterModule } from '@angular/router'
 
 import { HomeComponent } from './_components'
 import { AuthGuard } from './_guards'
-import { GalleryComponent } from './_components'
+import { GalleriesComponent } from './_components'
 import { DuelsComponent } from './_components'
 
 const routes: Routes = [
@@ -12,8 +12,8 @@ const routes: Routes = [
     component: HomeComponent
   },
   {
-    path: 'gallery',
-    component: GalleryComponent
+    path: 'galleries',
+    component: GalleriesComponent
   },
   {
     path: 'duels',
