@@ -5,6 +5,7 @@ import { FormBuilder, FormGroup, Validators } from '@angular/forms'
 import { AuthenticationService } from 'src/app/_services'
 
 @Component({ 
+    selector: 'app-login-form',
     templateUrl: 'login-form.component.html' 
 })
 export class LoginFormComponent implements OnInit {
@@ -23,8 +24,6 @@ export class LoginFormComponent implements OnInit {
 
     ngOnInit() {
         this.initLoginFormValidator()
-        // reset login status
-        this._authenticationService.logout()
         // get return url from route parameters or default to '/'
         this.returnUrl = this.route.snapshot.queryParams['returnUrl'] || '/'
     }
@@ -52,6 +51,7 @@ export class LoginFormComponent implements OnInit {
                 data => {
                     console.log(data)
                     this.router.navigate([this.returnUrl])
+                    location.reload()
                 },
                 error => {
                     this.error = error
