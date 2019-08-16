@@ -4,7 +4,8 @@ import { Routes, RouterModule } from '@angular/router'
 import { HomeComponent, 
          GalleriesComponent, 
          DuelsComponent, 
-         RankingsComponent } from './_components'
+         RankingsComponent,
+         ChatsComponent } from './_components'
          
 import { AuthGuard } from './_guards'
 
@@ -24,6 +25,10 @@ const routes: Routes = [
   {
     path: 'rankings',
     component: RankingsComponent
+  },
+  {
+    path: 'chats',
+    component: ChatsComponent
   },
   // otherwise redirect to home
   { path: '**', redirectTo: '' }
