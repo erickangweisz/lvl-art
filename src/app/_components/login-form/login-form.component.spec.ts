@@ -5,6 +5,8 @@ import { RouterTestingModule } from '@angular/router/testing'
 
 import { LoginFormComponent } from './login-form.component'
 
+import { APP_CONFIG, AppConfig } from 'src/app/app-config.module'
+
 describe('LoginFormComponent', () => {
   let component: LoginFormComponent;
   let fixture: ComponentFixture<LoginFormComponent>;
@@ -19,6 +21,9 @@ describe('LoginFormComponent', () => {
       ],
       declarations: [ 
         LoginFormComponent
+      ],
+      providers: [
+        { provide: APP_CONFIG, useValue: AppConfig }
       ]
     })
     .compileComponents();
@@ -30,7 +35,7 @@ describe('LoginFormComponent', () => {
     fixture.detectChanges();
   });
 
-  /*it('should create', () => {
+  it('should create', () => {
     expect(component).toBeTruthy();
-  });*/
+  });
 });
