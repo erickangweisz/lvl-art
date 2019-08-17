@@ -7,13 +7,15 @@ import { UserService } from './user.service'
 
 describe('UserService', () => {
   beforeEach(() => TestBed.configureTestingModule({
+    imports: [ 
+      HttpClientModule 
+    ],
     providers: [ 
       HttpClient,
       UserService,
       InjectionToken,
       { provide: APP_CONFIG, useValue: AppConfig }
-    ],
-    imports: [ HttpClientModule ]
+    ]
   }))
 
   /*it('should be created', () => {
