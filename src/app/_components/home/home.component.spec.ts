@@ -1,6 +1,8 @@
 import { async, ComponentFixture, TestBed } from '@angular/core/testing'
 import { HttpClientTestingModule } from '@angular/common/http/testing'
 
+import { APP_CONFIG, AppConfig } from 'src/app/app-config.module'
+
 import { UserService } from 'src/app/_services'
 
 import { HomeComponent } from './home.component'
@@ -11,7 +13,10 @@ describe('HomeComponent', () => {
 
   beforeEach(async(() => {
     TestBed.configureTestingModule({
-      providers: [ UserService ],
+      providers: [ 
+        UserService, 
+        { provide: APP_CONFIG, useValue: AppConfig } 
+      ],
       declarations: [ HomeComponent ],
       imports: [ HttpClientTestingModule ]
     })
@@ -24,7 +29,7 @@ describe('HomeComponent', () => {
     fixture.detectChanges()
   })
 
-  /*it('should create', () => {
+  it('should create', () => {
     expect(component).toBeTruthy()
-  })*/
+  })
 })
