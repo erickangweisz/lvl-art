@@ -1,24 +1,58 @@
-<div class="container">
-    <br>
-    <form [formGroup]="loginForm" (ngSubmit)="onSubmit()">
-        <div class="form-group">
-            <label for="email">email</label>
-            <input type="text" formControlName="email" class="form-control" [ngClass]="{ 'is-invalid': submitted && f.email.errors }" />
-            <div *ngIf="submitted && f.email.errors" class="invalid-feedback">
-                <div *ngIf="f.email.errors.required">email is required</div>
+<div id="div-forms">
+    <!-- Login Form -->
+    <form [formGroup]="loginForm" id="login-form" (submit)="onSubmitLogin()">
+        <div class="modal-body">
+            <div id="div-login-msg" class="text-center">
+                <span id="text-login-msg">.TYPE YOUR EMAIL AND PASSWORD.</span>
+            </div>
+            <div class="form-group">
+                <div class="input-group">
+                    <div class="input-group-prepend">
+                        <span class="input-group-text"><i class="fas fa-envelope-square"></i></span>
+                    </div>
+                    <input type="text" formControlName="email" class="form-control" 
+                        [ngClass]="{ 'is-invalid': loginSubmitted && f.email.errors }" placeholder="Email" />
+                </div>
+                <div class="input-group">
+                    <div class="input-group-prepend">
+                        <span class="input-group-text"><i class="fas fa-key"></i></span>
+                    </div>
+                    <input type="password" formControlName="password" class="form-control" 
+                        [ngClass]="{ 'is-invalid': loginSubmitted && f.password.errors }" placeholder="Password" />
+                </div>
+                <div *ngIf="error" class="alert alert-danger">{{ error | uppercase }}</div>
             </div>
         </div>
-        <div class="form-group">
-            <label for="password">Password</label>
-            <input type="password" formControlName="password" class="form-control" [ngClass]="{ 'is-invalid': submitted && f.password.errors }" />
-            <div *ngIf="submitted && f.password.errors" class="invalid-feedback">
-                <div *ngIf="f.password.errors.required">Password is required</div>
+        <div class="modal-footer">
+            <button id="btnLogin" class="btn btn-primary btn-lg btn-block mr-auto">
+                <strong>LOGIN <i class="fas fa-arrow-left"></i></strong>
+            </button>
+            <button id="login_recoverpass_btn" type="button" class="btn btn-link">LOST PASSWORD?</button>
+            <button id="login_register_btn" type="button" class="btn btn-link">REGISTER</button>
+        </div>
+    </form>
+    <!-- Recover-Password Form -->
+    <form [formGroup]="recoverPassForm" id="recoverpass-form" (submit)="onSubmitRecoverPass()" style="display:none">
+        <div class="modal-body">
+            <div id="div-recoverpass-msg" class="text-center">
+                <span id="text-recoverpass-msg">.RECOVER YOUR PASSWORD.</span>
+            </div>
+            <div class="form-group">
+                <div class="input-group">
+                    <div class="input-group-prepend">
+                        <span class="input-group-text"><i class="fas fa-envelope-square"></i></span>
+                    </div>
+                    <input type="email" formControlName="emailToRecoverPass" class="form-control" 
+                        [ngClass]="{ 'is-invalid': recoverPassSubmitted && r.emailToRecoverPass.errors }" placeholder="Email">
+                </div>
             </div>
         </div>
-        <hr>
-        <div class="form-group">
-            <button [disabled]="loading" class="btn btn-success form-control">Login</button>
+        <div class="modal-footer">
+            <button id="btnLost" class="btn btn-primary btn-lg btn-block">
+                <strong>SEND <i class="fas fa-arrow-right"></i></strong>
+            </button>
+            <button id="recoverpass_login_btn" type="button" class="btn btn-link">LOGIN</button>
+            <button id="recoverpass_register_btn" type="button" class="btn btn-link">REGISTER</button>
         </div>
-        <div *ngIf="error" class="alert alert-danger">{{ error }}</div>
     </form>
 </div>

@@ -4,16 +4,22 @@ import { Router, ActivatedRoute } from '@angular/router'
 import { FormBuilder, FormGroup, Validators } from '@angular/forms'
 import { AuthenticationService } from 'src/app/_services'
 
+declare let $: any
+
 @Component({ 
     selector: 'app-login-form',
     templateUrl: 'login-form.component.html' 
 })
 export class LoginFormComponent implements OnInit {
     loginForm: FormGroup
-    loading: boolean = false
-    submitted: boolean = false
+    recoverPassForm: FormGroup
+
+    loginSubmitted: boolean = false
+    recoverPassSubmitted: boolean = false
     returnUrl: string
     error: string = ''
+
+    $divForms: any
 
     constructor(
         private formBuilder: FormBuilder,
@@ -24,6 +30,10 @@ export class LoginFormComponent implements OnInit {
 
     ngOnInit() {
         this.initLoginFormValidator()
+        this.initRecoverPassFormValidator()
+        this.formAnimationHandler()
+
+        this.$divForms= $('#div-forms')
         // get return url from route parameters or default to '/'
         this.returnUrl = this.route.snapshot.queryParams['returnUrl'] || '/'
     }
@@ -35,27 +45,89 @@ export class LoginFormComponent implements OnInit {
         })
     }
 
+    initRecoverPassFormValidator() {
+        this.recoverPassForm = this.formBuilder.group({
+            emailToRecoverPass: ['', Validators.required]
+        })
+    }
+
+    formAnimationHandler() {
+        let $formLogin = $('#login-form')
+        let $formRecoverPass = $('#recoverpass-form')
+        let $formRegister = $('#register-form')
+    
+        $('#login_register_btn').click( () => { this._modalAnimation($formLogin, $formRegister) })
+        $('#register_login_btn').click( () => { this._modalAnimation($formRegister, $formLogin) })
+        $('#login_recoverpass_btn').click( () => { this._modalAnimation($formLogin, $formRecoverPass) })
+        $('#recoverpass_login_btn').click( () => { this._modalAnimation($formRecoverPass, $formLogin) })
+        $('#recoverpass_register_btn').click( () => { this._modalAnimation($formRecoverPass, $formRegister) })
+        $('#register_recoverpass_btn').click( () => { this._modalAnimation($formRegister, $formRecoverPass) })
+    }
+
+    private _modalAnimation ($oldForm: any, $newForm: any) {
+        let $oldH = $oldForm.height()
+        let $newH = $newForm.height()
+        const $modalAnimationTime = 300
+        
+        this.$divForms.css('height', $oldH)
+        $oldForm.fadeToggle($modalAnimationTime, () => {
+            this.$divForms.animate({height: $newH}, $modalAnimationTime, () => {
+                $newForm.fadeToggle($modalAnimationTime)
+            })
+        })
+    }
+
+    private _changeMessagesOfLoginForm($divTag, $textTag, $divClass, $msgText) {
+        this._fadeOutMessage($textTag, $msgText)
+        
+        if ($divClass === '') {
+          $divTag.removeClass('error')
+          $divTag.removeClass('success')
+        }
+        $divTag.addClass($divClass)
+    }
+
+    private _fadeOutMessage ($msgId, $msgText) {
+        let $msgAnimateTime = 150
+        $msgId.fadeOut($msgAnimateTime, () => {
+          $($msgId).text($msgText).fadeIn($msgAnimateTime)
+        })
+    }
+
     // convenience getter for easy access to form fields
     get f() { return this.loginForm.controls }
+    get r() { return this.recoverPassForm.controls }
 
-    onSubmit() {
-        this.submitted = true
+    onSubmitLogin() {
+        this.loginSubmitted = true
 
-        if (this.loginForm.invalid)
-            return
+        if (this.loginForm.invalid) return
 
-        this.loading = true
         this._authenticationService.login(this.f.email.value, this.f.password.value)
             .pipe(first())
             .subscribe(
                 data => {
-                    console.log(data)
                     this.router.navigate([this.returnUrl])
                     location.reload()
                 },
                 error => {
                     this.error = error
-                    this.loading = false
                 })
+    }
+
+    onSubmitRecoverPass() {
+        let form = (<HTMLInputElement>document.getElementById("recoverpass-form"))
+        this.recoverPassSubmitted = true
+
+        if (this.recoverPassForm.invalid) return
+
+        this._changeMessagesOfLoginForm(
+            $('#div-recoverpass-msg'), 
+            $('#text-recoverpass-msg'), 
+            "success", 
+            "We have sent you an email with your password!!") 
+
+        form.classList.add('was-validated')
+        console.log('AQUI LLAMO AL SERVICIO QUE REALIZA LA PETICIÓN')
     }
 }
