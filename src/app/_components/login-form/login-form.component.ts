@@ -13,9 +13,13 @@ declare let $: any
 export class LoginFormComponent implements OnInit {
     loginForm: FormGroup
     recoverPassForm: FormGroup
+    registerForm: FormGroup
 
     loginSubmitted: boolean = false
     recoverPassSubmitted: boolean = false
+    registerSubmitted: boolean = false
+
+    categories = ['Illustration', 'Photography', 'Watcher']
     returnUrl: string
     error: string = ''
 
@@ -31,6 +35,7 @@ export class LoginFormComponent implements OnInit {
     ngOnInit() {
         this.initLoginFormValidator()
         this.initRecoverPassFormValidator()
+        this.initRegisterFormValidator()
         this.formAnimationHandler()
 
         this.$divForms= $('#div-forms')
@@ -41,13 +46,24 @@ export class LoginFormComponent implements OnInit {
     initLoginFormValidator() {
         this.loginForm = this.formBuilder.group({
             email: ['', Validators.required],
-            password: ['', Validators.required]
+            password: ['', Validators.required, Validators.minLength(6)]
         })
     }
 
     initRecoverPassFormValidator() {
         this.recoverPassForm = this.formBuilder.group({
             emailToRecoverPass: ['', Validators.required]
+        })
+    }
+
+    initRegisterFormValidator() {
+        this.registerForm = this.formBuilder.group({
+            emailToRegister: ['', Validators.required],
+            passwordToRegister: ['', Validators.required],
+            username: ['', Validators.required],
+            firstname: ['', Validators.required],
+            lastname: ['', Validators.required],
+            category: ['', Validators.required]
         })
     }
 
@@ -96,7 +112,8 @@ export class LoginFormComponent implements OnInit {
 
     // convenience getter for easy access to form fields
     get f() { return this.loginForm.controls }
-    get r() { return this.recoverPassForm.controls }
+    get p() { return this.recoverPassForm.controls }
+    get r() { return this.registerForm.controls }
 
     onSubmitLogin() {
         this.loginSubmitted = true
@@ -129,5 +146,17 @@ export class LoginFormComponent implements OnInit {
 
         form.classList.add('was-validated')
         console.log('AQUI LLAMO AL SERVICIO QUE REALIZA LA PETICIÓN')
+    }
+
+    onSubmitRegister() {
+        console.log('A??')
+        this.registerSubmitted = true
+        console.log(this.registerForm.invalid)
+
+        if (this.registerForm.invalid) return
+
+        // TODO
+        
+        console.log('PALANTELOCO')
     }
 }
