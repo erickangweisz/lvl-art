@@ -102,12 +102,20 @@
                       <span class="input-group-text"><i class="fas fa-hat-wizard"></i></span>
                     </div>
                     <select formControlName="category" class="form-control" id="register_category" 
-                        [ngClass]="{ 'is-invalid': registerSubmitted && r.category.errors }"required>
+                        [ngClass]="{ 'is-invalid': registerSubmitted && r.category.errors }">
                         <option value="" disabled>Choose your category</option>
                         <option *ngFor="let category of categories">
                             {{ category }}
                         </option>
                     </select>
+                </div>
+                <div class="input-group">
+                    <div class="input-group-prepend">
+                        <span class="input-group-text"><i class="fas fa-birthday-cake"></i></span>
+                    </div>
+                    <input type="date" formControlName="birthday" id="register_birthday" 
+                        class="form-control" min="1919-12-31" max="2010-12-31"
+                        [ngClass]="{ 'is-invalid': registerSubmitted && r.birthday.errors }">
                 </div>
                 <div *ngIf="error" class="alert alert-danger">{{ error | uppercase }}</div>
             </div>

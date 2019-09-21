@@ -3,6 +3,7 @@ import { first } from 'rxjs/operators'
 import { Router, ActivatedRoute } from '@angular/router'
 import { FormBuilder, FormGroup, Validators } from '@angular/forms'
 import { AuthenticationService } from 'src/app/_services'
+import { User } from 'src/app/_models'
 
 declare let $: any
 
@@ -19,7 +20,7 @@ export class LoginFormComponent implements OnInit {
     recoverPassSubmitted: boolean = false
     registerSubmitted: boolean = false
 
-    categories = ['Illustration', 'Photography', 'Watcher']
+    categories = ['illustration', 'photography', 'watcher']
     returnUrl: string
     error: string = ''
 
@@ -63,7 +64,8 @@ export class LoginFormComponent implements OnInit {
             username: ['', Validators.required],
             firstname: ['', Validators.required],
             lastname: ['', Validators.required],
-            category: ['', Validators.required]
+            category: ['', Validators.required],
+            birthday: ['', Validators.required]
         })
     }
 
@@ -149,14 +151,20 @@ export class LoginFormComponent implements OnInit {
     }
 
     onSubmitRegister() {
-        console.log('A??')
         this.registerSubmitted = true
-        console.log(this.registerForm.invalid)
 
         if (this.registerForm.invalid) return
 
-        // TODO
-        
-        console.log('PALANTELOCO')
+        let userToRegister = new User()
+        userToRegister.email = this.registerForm.value['emailToRegister']
+        userToRegister.password = this.registerForm.value['passwordToRegister']
+        userToRegister.username = this.registerForm.value['username']
+        userToRegister.firstname = this.registerForm.value['firstname']
+        userToRegister.lastname = this.registerForm.value['lastname']
+        userToRegister.category = this.registerForm.value['category']
+        userToRegister.birthday = this.registerForm.value['birthday']
+        userToRegister.role = 'user'
+
+        this._authenticationService.register(userToRegister)
     }
 }
