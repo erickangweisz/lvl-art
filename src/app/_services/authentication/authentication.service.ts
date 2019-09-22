@@ -26,8 +26,8 @@ export class AuthenticationService {
 
   register(user: User) {
     return this.http.post(`${this.config.apiURL}/signup`, user)
-      .subscribe(userRegistered => {
-        console.log(userRegistered)
+      .subscribe(tokenGenerated => {
+        console.log(tokenGenerated)
       })
   }
 

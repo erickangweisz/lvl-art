@@ -62,8 +62,7 @@ export class LoginFormComponent implements OnInit {
             emailToRegister: ['', Validators.required],
             passwordToRegister: ['', Validators.required],
             username: ['', Validators.required],
-            firstname: ['', Validators.required],
-            lastname: ['', Validators.required],
+            fullname: ['', Validators.required],
             category: ['', Validators.required],
             birthday: ['', Validators.required]
         })
@@ -159,8 +158,7 @@ export class LoginFormComponent implements OnInit {
         userToRegister.email = this.registerForm.value['emailToRegister']
         userToRegister.password = this.registerForm.value['passwordToRegister']
         userToRegister.username = this.registerForm.value['username']
-        userToRegister.firstname = this.registerForm.value['firstname']
-        userToRegister.lastname = this.registerForm.value['lastname']
+        userToRegister.fullname = this.registerForm.value['fullname']
         userToRegister.category = this.registerForm.value['category']
         userToRegister.birthday = this.registerForm.value['birthday']
         userToRegister.role = 'user'

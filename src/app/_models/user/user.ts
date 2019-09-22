@@ -3,8 +3,7 @@ export class User {
     private _email: string
     private _password: string
     private _username: string
-    private _firstname: string
-    private _lastname: string
+    private _fullname: string
     private _category: string
     private _birthday: Date
     private _experience: number
@@ -35,11 +34,8 @@ export class User {
     get username(): string { return this._username }
     set username(username: string) { this._username = username }
 
-    get firstname(): string { return this._firstname }
-    set firstname(firstname: string) { this._firstname = firstname }
-
-    get lastname(): string { return this._lastname }
-    set lastname(lastname: string) { this._lastname = lastname }
+    get fullname(): string { return this._fullname }
+    set fullname(fullname: string) { this._fullname = fullname }
 
     get category(): string { return this._category }
     set category(category: string) { this._category = category }
