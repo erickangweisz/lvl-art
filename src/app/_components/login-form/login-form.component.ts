@@ -2,8 +2,9 @@ import { Component, OnInit } from '@angular/core'
 import { first } from 'rxjs/operators'
 import { Router, ActivatedRoute } from '@angular/router'
 import { FormBuilder, FormGroup, Validators } from '@angular/forms'
-import { AuthenticationService } from 'src/app/_services'
 import { User } from 'src/app/_models'
+import { AuthenticationService,
+         UserService } from 'src/app/_services'
 
 declare let $: any
 
@@ -22,7 +23,6 @@ export class LoginFormComponent implements OnInit {
 
     categories = ['illustration', 'photography', 'watcher']
     returnUrl: string
-    error: string = ''
 
     $divForms: any
 
@@ -30,7 +30,8 @@ export class LoginFormComponent implements OnInit {
         private formBuilder: FormBuilder,
         private route: ActivatedRoute,
         private router: Router,
-        private _authenticationService: AuthenticationService
+        private _authenticationService: AuthenticationService,
+        private _userService: UserService
     ) {}
 
     ngOnInit() {
@@ -47,7 +48,7 @@ export class LoginFormComponent implements OnInit {
     initLoginFormValidator() {
         this.loginForm = this.formBuilder.group({
             email: ['', Validators.required],
-            password: ['', Validators.required, Validators.minLength(6)]
+            password: ['', Validators.required]
         })
     }
 
@@ -129,7 +130,11 @@ export class LoginFormComponent implements OnInit {
                     location.reload()
                 },
                 error => {
-                    this.error = error
+                    this._changeMessagesOfLoginForm(
+                        $('#div-login-msg'), 
+                        $('#text-login-msg'), 
+                        "text-danger", 
+                        error.toUpperCase() + ' !')
                 })
     }
 
@@ -151,6 +156,8 @@ export class LoginFormComponent implements OnInit {
 
     onSubmitRegister() {
         this.registerSubmitted = true
+        let $formLogin = $('#login-form')
+        let $formRegister = $('#register-form')
 
         if (this.registerForm.invalid) return
 
@@ -163,6 +170,30 @@ export class LoginFormComponent implements OnInit {
         userToRegister.birthday = this.registerForm.value['birthday']
         userToRegister.role = 'user'
 
-        this._authenticationService.register(userToRegister)
+        this._userService.register(userToRegister)
+            .pipe(first())
+            .subscribe(
+                data => {
+                    if (data) {
+                        this.registerSubmitted = true
+                        this._changeMessagesOfLoginForm(
+                            $('#div-login-msg'),
+                            $('#text-login-msg'),
+                            "text-success",
+                            "user created successfully !".toUpperCase()
+                        )
+                        
+                        this._modalAnimation($formRegister, $formLogin)
+                        $('#register-form')[0].reset()
+                    }
+                },
+                error => {
+                    this._changeMessagesOfLoginForm(
+                        $('#div-register-msg'), 
+                        $('#text-register-msg'), 
+                        "text-danger", 
+                        error.toUpperCase() + ' !')
+                }
+            )
     }
 }

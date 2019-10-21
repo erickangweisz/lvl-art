@@ -22,4 +22,8 @@ export class UserService {
   getAll() {
     return this.http.get<User[]>(`${this.config.apiURL}/users`)
   }
+
+  register(user: User) {
+    return this.http.post(`${this.config.apiURL}/register`, user)
+  }
 }

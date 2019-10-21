@@ -10,17 +10,16 @@
                     <div class="input-group-prepend">
                         <span class="input-group-text"><i class="fas fa-envelope-square"></i></span>
                     </div>
-                    <input type="text" formControlName="email" class="form-control" 
+                    <input type="email" formControlName="email" class="form-control" 
                         [ngClass]="{ 'is-invalid': loginSubmitted && f.email.errors }" placeholder="Email" />
                 </div>
                 <div class="input-group">
                     <div class="input-group-prepend">
                         <span class="input-group-text"><i class="fas fa-key"></i></span>
                     </div>
-                    <input type="password" autocomplete="password" formControlName="password" class="form-control" 
+                    <input type="password" formControlName="password" autocomplete="password" class="form-control" 
                         [ngClass]="{ 'is-invalid': loginSubmitted && f.password.errors }" placeholder="Password" />
                 </div>
-                <div *ngIf="error" class="alert alert-danger">{{ error | uppercase }}</div>
             </div>
         </div>
         <div class="modal-footer">
@@ -31,6 +30,7 @@
             <button id="login_register_btn" type="button" class="btn btn-link">REGISTER</button>
         </div>
     </form>
+
     <!-- Recover-Password Form -->
     <form [formGroup]="recoverPassForm" id="recoverpass-form" (submit)="onSubmitRecoverPass()" style="display:none">
         <div class="modal-body">
@@ -55,46 +55,47 @@
             <button id="recoverpass_register_btn" type="button" class="btn btn-link">REGISTER</button>
         </div>
     </form>
+    
     <!-- Register Form -->
     <form [formGroup]="registerForm" id="register-form" (submit)="onSubmitRegister()" style="display:none">
         <div class="modal-body">
-            <div id="div-login-msg" class="text-center">
-                <span id="text-login-msg">.CREATE YOUR ACCOUNT.</span>
+            <div id="div-register-msg" class="text-center">
+                <span id="text-register-msg">.CREATE YOUR ACCOUNT.</span>
             </div>
             <div class="form-group">
                 <div class="input-group">
                     <div class="input-group-prepend">
                         <span class="input-group-text"><i class="fas fa-envelope-square"></i></span>
                     </div>
-                    <input type="email" formControlName="emailToRegister" class="form-control" 
+                    <input type="email" formControlName="emailToRegister" class="form-control" name="email"
                         [ngClass]="{ 'is-invalid': registerSubmitted && r.emailToRegister.errors }" placeholder="Email" />
                 </div>
                 <div class="input-group">
                     <div class="input-group-prepend">
                         <span class="input-group-text"><i class="fas fa-key"></i></span>
                     </div>
-                    <input type="password" autocomplete="passwordToRegister" formControlName="passwordToRegister" class="form-control" 
+                    <input type="password" autocomplete="passwordToRegister" formControlName="passwordToRegister" name="password" class="form-control" 
                         [ngClass]="{ 'is-invalid': registerSubmitted && r.passwordToRegister.errors }" placeholder="Password" />
                 </div>
                 <div class="input-group">
                     <div class="input-group-prepend">
                         <span class="input-group-text"><i class="fas fa-book-dead"></i></span>
                     </div>
-                    <input type="text" formControlName="username" class="form-control" 
+                    <input type="text" formControlName="username" class="form-control" name="username"
                         [ngClass]="{ 'is-invalid': registerSubmitted && r.username.errors }" placeholder="Username" />
                 </div>
                 <div class="input-group">
                     <div class="input-group-prepend">
                         <span class="input-group-text"><i class="fas fa-address-card"></i></span>
                     </div>
-                    <input type="text" formControlName="fullname" class="form-control" 
+                    <input type="text" formControlName="fullname" class="form-control" name="fullname"
                         [ngClass]="{ 'is-invalid': registerSubmitted && r.fullname.errors }" placeholder="Fullname" />
                 </div>
                 <div class="input-group">
                     <div class="input-group-prepend">
                       <span class="input-group-text"><i class="fas fa-hat-wizard"></i></span>
                     </div>
-                    <select formControlName="category" class="form-control" id="register_category" 
+                    <select formControlName="category" class="form-control" id="register_category" name="category"
                         [ngClass]="{ 'is-invalid': registerSubmitted && r.category.errors }">
                         <option value="" disabled>Choose your category</option>
                         <option *ngFor="let category of categories">
@@ -107,10 +108,10 @@
                         <span class="input-group-text"><i class="fas fa-birthday-cake"></i></span>
                     </div>
                     <input type="date" formControlName="birthday" id="register_birthday" 
-                        class="form-control" min="1919-12-31" max="2010-12-31"
+                        class="form-control" min="1919-12-31" max="2010-12-31" name="birthday"
                         [ngClass]="{ 'is-invalid': registerSubmitted && r.birthday.errors }">
                 </div>
-                <div *ngIf="error" class="alert alert-danger">{{ error | uppercase }}</div>
+                <!--<div *ngIf="registerError" class="alert alert-danger">{{ registerError | uppercase }}</div>-->
             </div>
         </div>
         <div class="modal-footer">
