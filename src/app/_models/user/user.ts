@@ -39,7 +39,7 @@ export class User {
 
     get category(): string { return this._category }
     set category(category: string) { this._category = category }
-    
+
     get birthday(): Date { return this._birthday }
     set birthday(birthday: Date) { this._birthday = birthday }
 

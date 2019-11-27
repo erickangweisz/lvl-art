@@ -6,20 +6,20 @@ import { User } from 'src/app/_models'
 import { AuthenticationService,
          UserService } from 'src/app/_services'
 
-declare let $: any
+declare const $: any
 
-@Component({ 
+@Component({
     selector: 'app-login-form',
-    templateUrl: 'login-form.component.html' 
+    templateUrl: 'login-form.component.html'
 })
 export class LoginFormComponent implements OnInit {
     loginForm: FormGroup
     recoverPassForm: FormGroup
     registerForm: FormGroup
 
-    loginSubmitted: boolean = false
-    recoverPassSubmitted: boolean = false
-    registerSubmitted: boolean = false
+    loginSubmitted = false
+    recoverPassSubmitted = false
+    registerSubmitted = false
 
     categories = ['illustration', 'photography', 'watcher']
     returnUrl: string
@@ -30,8 +30,8 @@ export class LoginFormComponent implements OnInit {
         private formBuilder: FormBuilder,
         private route: ActivatedRoute,
         private router: Router,
-        private _authenticationService: AuthenticationService,
-        private _userService: UserService
+        private authenticationService: AuthenticationService,
+        private userService: UserService
     ) {}
 
     ngOnInit() {
@@ -40,9 +40,9 @@ export class LoginFormComponent implements OnInit {
         this.initRegisterFormValidator()
         this.formAnimationHandler()
 
-        this.$divForms= $('#div-forms')
+        this.$divForms = $('#div-forms')
         // get return url from route parameters or default to '/'
-        this.returnUrl = this.route.snapshot.queryParams['returnUrl'] || '/'
+        this.returnUrl = this.route.snapshot.queryParams.returnUrl || '/'
     }
 
     initLoginFormValidator() {
@@ -70,10 +70,10 @@ export class LoginFormComponent implements OnInit {
     }
 
     formAnimationHandler() {
-        let $formLogin = $('#login-form')
-        let $formRecoverPass = $('#recoverpass-form')
-        let $formRegister = $('#register-form')
-    
+        const $formLogin = $('#login-form')
+        const $formRecoverPass = $('#recoverpass-form')
+        const $formRegister = $('#register-form')
+
         $('#login_register_btn').click( () => { this._modalAnimation($formLogin, $formRegister) })
         $('#register_login_btn').click( () => { this._modalAnimation($formRegister, $formLogin) })
         $('#login_recoverpass_btn').click( () => { this._modalAnimation($formLogin, $formRecoverPass) })
@@ -82,11 +82,11 @@ export class LoginFormComponent implements OnInit {
         $('#register_recoverpass_btn').click( () => { this._modalAnimation($formRegister, $formRecoverPass) })
     }
 
-    private _modalAnimation ($oldForm: any, $newForm: any) {
-        let $oldH = $oldForm.height()
-        let $newH = $newForm.height()
+    private _modalAnimation($oldForm: any, $newForm: any) {
+        const $oldH = $oldForm.height()
+        const $newH = $newForm.height()
         const $modalAnimationTime = 300
-        
+
         this.$divForms.css('height', $oldH)
         $oldForm.fadeToggle($modalAnimationTime, () => {
             this.$divForms.animate({height: $newH}, $modalAnimationTime, () => {
@@ -97,7 +97,7 @@ export class LoginFormComponent implements OnInit {
 
     private _changeMessagesOfLoginForm($divTag, $textTag, $divClass, $msgText) {
         this._fadeOutMessage($textTag, $msgText)
-        
+
         if ($divClass === '') {
           $divTag.removeClass('error')
           $divTag.removeClass('success')
@@ -105,8 +105,8 @@ export class LoginFormComponent implements OnInit {
         $divTag.addClass($divClass)
     }
 
-    private _fadeOutMessage ($msgId, $msgText) {
-        let $msgAnimateTime = 150
+    private _fadeOutMessage($msgId, $msgText) {
+        const $msgAnimateTime = 150
         $msgId.fadeOut($msgAnimateTime, () => {
           $($msgId).text($msgText).fadeIn($msgAnimateTime)
         })
@@ -120,9 +120,9 @@ export class LoginFormComponent implements OnInit {
     onSubmitLogin() {
         this.loginSubmitted = true
 
-        if (this.loginForm.invalid) return
+        if (this.loginForm.invalid) { return }
 
-        this._authenticationService.login(this.f.email.value, this.f.password.value)
+        this.authenticationService.login(this.f.email.value, this.f.password.value)
             .pipe(first())
             .subscribe(
                 data => {
@@ -131,46 +131,47 @@ export class LoginFormComponent implements OnInit {
                 },
                 error => {
                     this._changeMessagesOfLoginForm(
-                        $('#div-login-msg'), 
-                        $('#text-login-msg'), 
-                        "text-danger", 
+                        $('#div-login-msg'),
+                        $('#text-login-msg'),
+                        'text-danger',
                         error.toUpperCase() + ' !')
                 })
     }
 
     onSubmitRecoverPass() {
-        let form = (<HTMLInputElement>document.getElementById("recoverpass-form"))
+        const form = (document.getElementById('recoverpass-form') as HTMLInputElement)
         this.recoverPassSubmitted = true
 
-        if (this.recoverPassForm.invalid) return
+        if (this.recoverPassForm.invalid) { return }
 
         this._changeMessagesOfLoginForm(
-            $('#div-recoverpass-msg'), 
-            $('#text-recoverpass-msg'), 
-            "success", 
-            "We have sent you an email with your password!!") 
+            $('#div-recoverpass-msg'),
+            $('#text-recoverpass-msg'),
+            'success',
+            'We have sent you an email with your password!!')
 
         form.classList.add('was-validated')
+        // TODO
         console.log('AQUI LLAMO AL SERVICIO QUE REALIZA LA PETICIÓN')
     }
 
     onSubmitRegister() {
         this.registerSubmitted = true
-        let $formLogin = $('#login-form')
-        let $formRegister = $('#register-form')
+        const $formLogin = $('#login-form')
+        const $formRegister = $('#register-form')
 
-        if (this.registerForm.invalid) return
+        if (this.registerForm.invalid) { return }
 
-        let userToRegister = new User()
-        userToRegister.email = this.registerForm.value['emailToRegister']
-        userToRegister.password = this.registerForm.value['passwordToRegister']
-        userToRegister.username = this.registerForm.value['username']
-        userToRegister.fullname = this.registerForm.value['fullname']
-        userToRegister.category = this.registerForm.value['category']
-        userToRegister.birthday = this.registerForm.value['birthday']
+        const userToRegister = new User()
+        userToRegister.email = this.registerForm.value.emailToRegister
+        userToRegister.password = this.registerForm.value.passwordToRegister
+        userToRegister.username = this.registerForm.value.username
+        userToRegister.fullname = this.registerForm.value.fullname
+        userToRegister.category = this.registerForm.value.category
+        userToRegister.birthday = this.registerForm.value.birthday
         userToRegister.role = 'user'
 
-        this._userService.register(userToRegister)
+        this.userService.register(userToRegister)
             .pipe(first())
             .subscribe(
                 data => {
@@ -179,19 +180,19 @@ export class LoginFormComponent implements OnInit {
                         this._changeMessagesOfLoginForm(
                             $('#div-login-msg'),
                             $('#text-login-msg'),
-                            "text-success",
-                            "user created successfully !".toUpperCase()
+                            'text-success',
+                            'user created successfully !'.toUpperCase()
                         )
-                        
+
                         this._modalAnimation($formRegister, $formLogin)
                         $('#register-form')[0].reset()
                     }
                 },
                 error => {
                     this._changeMessagesOfLoginForm(
-                        $('#div-register-msg'), 
-                        $('#text-register-msg'), 
-                        "text-danger", 
+                        $('#div-register-msg'),
+                        $('#text-register-msg'),
+                        'text-danger',
                         error.toUpperCase() + ' !')
                 }
             )
