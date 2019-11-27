@@ -13,8 +13,8 @@ export class NavbarComponent implements OnInit {
   currentUser: JSON
 
   constructor(
-    private _authService: AuthenticationService, 
-    private _navbarService: NavbarService
+    private authService: AuthenticationService,
+    private navbarService: NavbarService
   ) {
     this.title = 'LVL-ART'
     this.currentUser = JSON.parse(localStorage.getItem('currentUser'))
@@ -25,12 +25,14 @@ export class NavbarComponent implements OnInit {
   }
 
   initNavbarVisibility() {
-    if (this.currentUser) 
-      this._navbarService.show()
+    if (this.currentUser) {
+      this.navbarService.show()
+    }
   }
 
   logout() {
-    this._navbarService.hide()
-    this._authService.logout()
+    this.navbarService.hide()
+    this.authService.logout()
   }
+
 }

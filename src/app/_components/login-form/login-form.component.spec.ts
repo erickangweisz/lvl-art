@@ -19,7 +19,7 @@ describe('LoginFormComponent', () => {
         ReactiveFormsModule,
         HttpClientTestingModule
       ],
-      declarations: [ 
+      declarations: [
         LoginFormComponent
       ],
       providers: [

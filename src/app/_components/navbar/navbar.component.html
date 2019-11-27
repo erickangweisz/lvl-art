@@ -38,7 +38,7 @@
         </a>
       </li>
 
-      <li *ngIf="_navbarService.visible" class="nav-item">
+      <li *ngIf="navbarService.visible" class="nav-item">
         <button id="btnProfile" class="txt-size btn btn-info d-sm-none d-xs-none d-none d-lg-block m-left-10" 
           routerLink="/profile" routerLinkActive="is-hover">
           PROFILE <i class="fas fa-user-astronaut"></i>
@@ -49,12 +49,12 @@
         </button>
       </li>
 
-      <li *ngIf="!_navbarService.visible" class="nav-item">
+      <li *ngIf="!navbarService.visible" class="nav-item">
         <a class="nav-link btn btn-primary btn-login" role="button" data-toggle="modal" data-target="#login-modal">
           <strong>LOGIN</strong>&nbsp;<i class="fas fa-sign-in-alt"></i>
         </a>
       </li>
-      <li *ngIf="_navbarService.visible" class="nav-item">
+      <li *ngIf="navbarService.visible" class="nav-item">
         <a (click)="logout()" class="nav-link btn btn-primary btn-login" role="button">
           <strong>LOGOUT</strong>&nbsp;<i class="fas fa-sign-out-alt"></i>
         </a>

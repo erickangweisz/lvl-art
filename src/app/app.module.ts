@@ -2,16 +2,16 @@ import { BrowserModule } from '@angular/platform-browser'
 import { NgModule } from '@angular/core'
 import { AppRoutingModule } from './app-routing.module'
 import { AppConfigModule } from './app-config.module'
-import { FormsModule, ReactiveFormsModule }   from '@angular/forms'
+import { FormsModule, ReactiveFormsModule } from '@angular/forms'
 
 import { HttpClientModule, HTTP_INTERCEPTORS } from '@angular/common/http'
 import { JwtInterceptor, ErrorInterceptor } from './_helpers'
 
 import { AppComponent } from './app.component'
-import { NavbarComponent, 
+import { NavbarComponent,
          LoginFormComponent,
          HomeComponent,
-         GalleriesComponent, 
+         GalleriesComponent,
          DuelsComponent,
          RankingsComponent,
          ChatsComponent,

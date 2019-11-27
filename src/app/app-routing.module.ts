@@ -1,13 +1,13 @@
 import { NgModule } from '@angular/core'
 import { Routes, RouterModule } from '@angular/router'
 
-import { HomeComponent, 
-         GalleriesComponent, 
-         DuelsComponent, 
+import { HomeComponent,
+         GalleriesComponent,
+         DuelsComponent,
          RankingsComponent,
-         ChatsComponent, 
+         ChatsComponent,
          ProfileComponent } from './_components'
-         
+
 import { AuthGuard } from './_guards'
 
 const routes: Routes = [
